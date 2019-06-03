@@ -359,7 +359,7 @@ class repo_market {
 		return array_reverse($return);
 	}
 	
-	public static function backup_restore($_backup) {
+public static function backup_restore($_backup) {
 		$backup_dir = calculPath(config::byKey('backup::path'));
 		if (!file_exists($backup_dir)) {
 			mkdir($backup_dir, 0770, true);
@@ -766,6 +766,10 @@ class repo_market {
 			}
 			if (isset($_result['register::dnsNumber']) && config::byKey('dns::number') != $_result['register::dnsNumber']) {
 				config::save('dns::number', $_result['register::dnsNumber']);
+				$restart_dns = true;
+			}
+			if (isset($_result['register::vpnurl']) && config::byKey('dns::vpnurl') != $_result['register::vpnurl']) {
+				config::save('dns::vpnurl', $_result['register::vpnurl']);
 				$restart_dns = true;
 			}
 			if (isset($_result['register::vpnPort']) && config::byKey('vpn::port') != $_result['register::vpnPort']) {
